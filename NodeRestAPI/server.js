@@ -3,10 +3,11 @@ const {
    getProducts,
    getProductByID,
    createProduct,
+   updateProduct,
+   deleteProductByID,
 } = require("./controllers/productController");
 
 const PORT = 5100;
-
 
 const server = http.createServer((req, res) => {
    // get all products:
@@ -16,7 +17,7 @@ const server = http.createServer((req, res) => {
    
    else if (
       // get single product by ID (first by getting id from url, then using it in getProductByID)
-      req.url.match(/\/api\/products\/([0-9])+/) &&
+      req.url.match(/\w/) &&
       req.method === "GET"
    ) {
       const id = req.url.split("/")[3];
@@ -27,7 +28,24 @@ const server = http.createServer((req, res) => {
       // create a new product and add to file:
       createProduct(req, res);
    } 
-    
+   
+   else if (
+      // update a product
+      req.url.match(/\w/) &&
+      req.method === "PUT"
+   ) {
+      const id = req.url.split("/")[3];
+      updateProduct(req, res, id);
+   } 
+   
+   else if (
+      // delete a product
+      req.url.match(/\w/) &&
+      req.method === "DELETE"
+   ) {
+      const id = req.url.split("/")[3];
+      deleteProductByID(req, res, id);
+   } 
    else {
       // otherwise return Route not found
       res.writeHead(404, { "content-type": "applicatoin/json" });
