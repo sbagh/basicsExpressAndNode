@@ -15,6 +15,7 @@ function findByID(id) {
    });
 }
 
+
 function create(product) {
    return new Promise((resolve, reject) => {
       const newProduct = { id: uuidv4(), ...product };
@@ -24,9 +25,11 @@ function create(product) {
       resolve(newProduct);
    });
 }
- 
+
+
 module.exports = {
    findAll,
    findByID,
    create,
 };
+

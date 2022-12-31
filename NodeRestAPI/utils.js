@@ -7,7 +7,7 @@ function writeDataToFile(filename, content) {
 }
 
 function getPostData(req) {
-   new Promise((resolve, reject) => {
+   return new Promise((resolve, reject) => {
       try {
          let body = "";
 
@@ -18,9 +18,7 @@ function getPostData(req) {
          req.on("end", () => {
             resolve(body);
          });
-      } 
-      
-      catch (error) {
+      } catch (error) {
          reject(error);
       }
    });
