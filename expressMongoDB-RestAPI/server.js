@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const QuotesRoute = require('./routes/Quotes')
 
 const app = express();
 const PORT = 3333;
+
+
 
 //MongoDB atlas uri
 const mongoAtlasURI = `mongodb+srv://test_user:Test123@cluster0.i85rhre.mongodb.net/?retryWrites=true&w=majority`;
@@ -31,7 +34,8 @@ app.get("/", (req, res) => {
    res.send("hell world");
 });
 
-const 
+app.use("/quotes", QuotesRoute);
+
 
 app.listen(PORT, () => console.log("listening on port", PORT));
   
